@@ -22,13 +22,12 @@ void printBoard(int board[][BOARD_SIZE]) {
 }
 
 bool solveKnightsTour(int board[][BOARD_SIZE], int row, int col, int move) {
-    
+
     if(!isValid(board, row, col)) {
         return false;
     }
     
     board[row][col] = move;
-    //printBoard(board);
     
     if(move == 63) {
         printBoard(board);
@@ -38,36 +37,35 @@ bool solveKnightsTour(int board[][BOARD_SIZE], int row, int col, int move) {
     for(int i = 1; i <= 8; i++ ) {
         switch (i) {
             case 1:
-                //cout << "ENTERED" << endl; 
-                if(solveKnightsTour(board, row-1, col-2, move + 1)) {
+                if(solveKnightsTour(board, row+1, col+2, move + 1)) {
                     return true;
                 } 
                 break;
-            case 2: if(solveKnightsTour(board, row-1, col+2, move + 1)) {
+            case 2: if(solveKnightsTour(board, row+2, col+1, move + 1)) {
                     return true;
                 } 
                 break;
-            case 3: if(solveKnightsTour(board, row+1, col-2, move + 1)) {
+            case 3: if(solveKnightsTour(board, row+2, col-1, move + 1)) {
                     return true;
                 }
                 break;
-            case 4: if(solveKnightsTour(board, row+1, col+2, move + 1)) {
+            case 4: if(solveKnightsTour(board, row+1, col-2, move + 1)) {
                     return true;
                 }
                 break;
-            case 5: if(solveKnightsTour(board, row-2, col-1, move + 1)) {
+            case 5: if(solveKnightsTour(board, row-1, col-2, move + 1)) {
                     return true;
                 }
                 break;
-            case 6: if(solveKnightsTour(board, row+2, col-1, move + 1)) {
+            case 6: if(solveKnightsTour(board, row-2, col-1, move + 1)) {
                     return true;
                 } 
                 break;
-            case 7: if(solveKnightsTour(board, row-2, col-1, move + 1)) {
+            case 7: if(solveKnightsTour(board, row-2, col+1, move + 1)) {
                     return true;
                 } 
                 break;
-            case 8: if(solveKnightsTour(board, row+2, col+1, move + 1)) {
+            case 8: if(solveKnightsTour(board, row-1, col+2, move + 1)) {
                     return true;
                 } 
                 break;
@@ -81,21 +79,16 @@ bool solveKnightsTour(int board[][BOARD_SIZE], int row, int col, int move) {
 
 bool isValid(int board[][BOARD_SIZE], int row, int col) {
     
-
-    //cout << "ENTERED IS VALID FUNCTION" << endl;
     //check to make sure youre still in the board
     if( row < 0 || row > 7 ) {
-        //cout << "1 IS FALSE" << endl;
         return false;
     }
     if( col < 0 || col > 7 ) {
-        //cout << "2 IS FALSE" << endl;
         return false;
     }
 
     //check to see if spot has already been moved to
     if( board[row][col] != EMPTY ) {
-        //cout << "3 IS FALSE" << endl;
         return false;
     }
 
