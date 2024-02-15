@@ -1,18 +1,29 @@
+/************************************************************************
+ * KnightsTour
+ * Project by Daniel Salameh
+ * 
+ * This program solves the classic KnightTour problem. It is created using
+ * proper recurrsive methods. ** BOARD_SIZE is configurable **
+ * 
+*************************************************************************/
+
 #ifndef HEADER_H
 #define HEADER_H
 
 #include <iostream>
 #include <iomanip>
+#include <vector>
 using namespace std;
 
-const int BOARD_SIZE = 8;
+const int BOARD_SIZE = 8; //IS CONFIGURABLE -- may significantly increase runtime
 const int EMPTY = 99;
 
-bool solveKnightsTour(int board[][BOARD_SIZE], int row, int col, int move);
-void printBoard(int board[][BOARD_SIZE]);
-bool isValid(int board[][BOARD_SIZE], int row, int col);
+bool solveKnightsTour(vector<vector<int>>& board, int row, int col, int move);
+void printBoard(const vector<vector<int>>& board);
+bool isValid(const vector<vector<int>>& board, int row, int col);
 
-void printBoard(int board[][BOARD_SIZE]) {
+void printBoard(const vector<vector<int>>& board) {
+    cout << BOARD_SIZE << " x " << BOARD_SIZE << " Knights Tour solution:" << endl;
     for(int r = 0; r < BOARD_SIZE; r++) {
         for(int c = 0; c < BOARD_SIZE; c++) {
             cout << " " << setw(2) << setfill('0') << board[r][c] << " ";
@@ -21,7 +32,7 @@ void printBoard(int board[][BOARD_SIZE]) {
     }
 }
 
-bool solveKnightsTour(int board[][BOARD_SIZE], int row, int col, int move) {
+bool solveKnightsTour(vector<vector<int>>& board, int row, int col, int move) {
 
     if(!isValid(board, row, col)) {
         return false;
@@ -29,7 +40,7 @@ bool solveKnightsTour(int board[][BOARD_SIZE], int row, int col, int move) {
     
     board[row][col] = move;
     
-    if(move == 63) {
+    if(move == (BOARD_SIZE*BOARD_SIZE-1)) {
         printBoard(board);
         return true;
     }
@@ -77,13 +88,13 @@ bool solveKnightsTour(int board[][BOARD_SIZE], int row, int col, int move) {
     return false;
 }
 
-bool isValid(int board[][BOARD_SIZE], int row, int col) {
+bool isValid(const vector<vector<int>>& board, int row, int col) {
     
     //check to make sure youre still in the board
-    if( row < 0 || row > 7 ) {
+    if( row < 0 || row > BOARD_SIZE-1 ) {
         return false;
     }
-    if( col < 0 || col > 7 ) {
+    if( col < 0 || col > BOARD_SIZE-1 ) {
         return false;
     }
 
